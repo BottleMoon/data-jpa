@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString(of = {"id", "username", "age"})
-public class Member {
+public class Member extends BaseEntity /*JpaBaseEntity*/ {
 
     @Id
     @GeneratedValue
@@ -23,8 +23,12 @@ public class Member {
     @JoinColumn(name = "team_id")
     private Team team;
 
-    public void changeTeam(Team team){
+    public void changeTeam(Team team) {
         this.team = team;
         team.getMembers().add(this);
+    }
+
+    public void changeUsername(String username) {
+        this.username = username;
     }
 }
